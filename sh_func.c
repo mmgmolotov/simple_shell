@@ -44,8 +44,9 @@ int main(void)
 		{
 			char *argument[2];
 			argument[0] = input;
-			argument[1] = NULL;/* argument raha array*/
+			argument[1] = NULL; /* argument raha array*/
 			execve(input, argument, NULL);
+			perror("execve");
 			free(input);
 			exit(1); /*bdlt 0 b 1 */
 		}
@@ -63,4 +64,4 @@ int main(void)
 	return (0);
 }
 /* READ THE COMMENT 
- * AFTER COMPILING : KATKHDM MS MAKAT3TICH l error d no such file or directory ; after u pull the changes try to fix it if u r free ; send message to know that u r working on it .*/
+ * AFTER COMPILING : KATKHDM MS MAKAT3TICH l error d no such file or directory ; after u pull the changes try to fix it if u r free ; send message to know that u r working on it .DONE DONE DONE DONE DONE DONE KHASS NJRBO CHECKERS*/
