@@ -87,3 +87,4 @@ int main(int argc, char *argv[])
 /*MOUAD: we will work with "argc & argv" to fix*/
 /*MOUAD: lets work with functions*/
 /*MAROUANE: last update ; only allowed functions used ; ALX gcc work correctly with args */
+/*Marouane: Header update , including new POSIX libiraries */
