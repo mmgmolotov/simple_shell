@@ -25,11 +25,12 @@ void fork_process(char *input, char *name)
 	pid = fork();
 	if (pid == 0)
 	{
-		char * argument[2];/*we don't use const arass taro (fixed) */
+		char *argument[2];/*we don't use const arass taro (fixed) */
+
 		argument[0] = input;
 		argument[1] = NULL;
 		execve(input, argument, NULL);
-		perror (name);
+		perror(name);
 		_exit(1);
 	}
 	else if (pid > 0)
@@ -86,5 +87,6 @@ int main(int argc, char *argv[])
 }
 /*MOUAD: we will work with "argc & argv" to fix*/
 /*MOUAD: lets work with functions*/
-/*MAROUANE: last update ; only allowed functions used ; ALX gcc work correctly with args */
+/*MAROUANE: last update ; only allowed functions used*/
+/* ; ALX gcc work correctly with args */
 /*Marouane: Header update , including new POSIX libiraries */
