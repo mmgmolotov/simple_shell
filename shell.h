@@ -8,4 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+void the_prompt(void);
+void fork_process(char *input, char *name);
+
 #endif /* SHELL_H */
