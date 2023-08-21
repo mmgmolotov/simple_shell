@@ -25,8 +25,7 @@ void fork_process(char *input, char *name)
 	pid = fork();
 	if (pid == 0)
 	{
-		char *const argument[2];
-
+		char * argument[2];/*we don't use const arass taro (fixed) */
 		argument[0] = input;
 		argument[1] = NULL;
 		execve(input, argument, NULL);
