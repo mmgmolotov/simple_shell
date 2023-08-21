@@ -7,6 +7,10 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <dirent.h>
+#include <sys/stat.h>
 
 void the_prompt(void);
 void fork_process(char *input, char *name);

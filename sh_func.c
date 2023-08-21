@@ -29,16 +29,14 @@ void fork_process(char *input, char *name)
 		argument[0] = input;
 		argument[1] = NULL;
 		execve(input, argument, NULL);
-		fprintf(stderr, "%s: ", name);
-		perror("");
-		exit(1);
+		perror (name);
+		_exit(1);
 	}
 	else if (pid > 0)
 		waitpid(pid, &wwait, 0);
 	else
 	{
-		fprintf(stderr, "%s: ", name);
-		perror("");
+		perror(name);
 	}
 }
 
@@ -60,6 +58,11 @@ int main(int argc, char *argv[])
 
 	input = NULL;
 	length = 0;
+	if (argc != 1)
+	{
+		perror("usage");
+		return (1);
+	}
 	while (1)
 	{
 		the_prompt();
@@ -83,3 +86,4 @@ int main(int argc, char *argv[])
 }
 /*MOUAD: we will work with "argc & argv" to fix*/
 /*MOUAD: lets work with functions*/
+/*MAROUANE: last update ; only allowed functions used ; ALX gcc work correctly with args */
