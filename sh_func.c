@@ -38,7 +38,26 @@ void fork_process(char *input, char *name)
 	else
 		perror(name);
 }
+/**
+ * command_arg - function declaration
+ *
+ * @input: user input
+ * @command: command to execute
+ * @argument: argumment added
+ * @argv: number of commands
+*/
+void command_arg(char *input, char *command, char *argument, char argv[])
+{
+	command = strtok(input, " ");
+	argument = strtok(NULL, " ");
 
+	if (command != NULL)
+	{
+		fork_process(input, &argv[0]);
+		if (argument != NULL)
+			printf("%s\n", argument);
+	}
+}
 /**
  * main - Entry point
  *
@@ -51,9 +70,13 @@ void fork_process(char *input, char *name)
 */
 int main(int argc, char *argv[])
 {
-	char *input, *command, *argument;
+	(void)(argc);
+
+	char *input;
+	char *command;
+	char *argument;
 	size_t length;
-	ssize_t input_readed; /* bach ncompariw integer m3a mokhtalaf signed */
+	ssize_t input_readed;
 
 	input = NULL;
 	length = 0;
@@ -74,14 +97,7 @@ int main(int argc, char *argv[])
 			free(input);
 			continue;
 		}
-		command = strtok(input, " ");
-		argument = strtok(NULL, " ");
-		if (command != NULL)
-		{
-			fork_process(input, argv[0]);
-			if (argument != NULL)
-				printf("%s", argument);
-		}
+		command_arg(input, command, argument, argv[0]);
 		free(input);
 		input = NULL;
 	}
