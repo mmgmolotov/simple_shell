@@ -7,7 +7,7 @@ void the_prompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		printf("#cisfun$");
+		printf("#cisfun$ ");
 		fflush(stdout);
 	}
 }
@@ -25,20 +25,18 @@ void fork_process(char *input, char *name)
 	pid = fork();
 	if (pid == 0)
 	{
-		char *argument[2];/*we don't use const arass taro (fixed) */
+		char *arr[2];/*we don't use const arass taro (fixed) */
 
-		argument[0] = input;
-		argument[1] = NULL;
-		execve(input, argument, NULL);
+		arr[0] = input;
+		arr[1] = NULL;
+		execve(input, arr, NULL);
 		perror(name);
-		_exit(1);
+		exit(1);
 	}
 	else if (pid > 0)
 		waitpid(pid, &wwait, 0);
 	else
-	{
 		perror(name);
-	}
 }
 
 /**
@@ -53,17 +51,12 @@ void fork_process(char *input, char *name)
 */
 int main(int argc, char *argv[])
 {
-	char *input;
+	char *input, *command, *argument;
 	size_t length;
 	ssize_t input_readed; /* bach ncompariw integer m3a mokhtalaf signed */
 
 	input = NULL;
 	length = 0;
-	if (argc != 1)
-	{
-		perror("usage");
-		return (1);
-	}
 	while (1)
 	{
 		the_prompt();
@@ -71,22 +64,27 @@ int main(int argc, char *argv[])
 		if (input_readed == -1)
 		{
 			if (isatty(STDIN_FILENO))
-				printf("exit\n");/*Mouad:ctrl+D katkteb lik exit f normal shell*/
-			free(input);/*9hrtina b leaks*/ /*Mouad: OFC ;)*/
+				printf("exit\n");
+			free(input);
 			exit(1);
 		}
-		input[input_readed - 1] = '\0'; /*bach tms7 new line*/ /*yeah i see it*/
-
-		fork_process(input, argv[0]);
-
+		input[input_readed - 1] = '\0';
+		if (strlen(input) == 0)
+		{
+			free(input);
+			continue;
+		}
+		command = strtok(input, " ");
+		argument = strtok(NULL, " ");
+		if (command != NULL)
+		{
+			fork_process(input, argv[0]);
+			if (argument != NULL)
+				printf("%s", argument);
+		}
 		free(input);
 		input = NULL;
 	}
-	free(input); /*added this ; i found a mem leak*/
+	free(input);
 	return (0);
 }
-/*MOUAD: we will work with "argc & argv" to fix*/
-/*MOUAD: lets work with functions*/
-/*MAROUANE: last update ; only allowed functions used*/
-/* ; ALX gcc work correctly with args */
-/*Marouane: Header update , including new POSIX libiraries */
