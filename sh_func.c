@@ -80,6 +80,11 @@ int main(int argc, char *argv[])
 
 	input = NULL;
 	length = 0;
+	if (argc != 1)
+	{
+		perror("usage");
+		return (0);
+	}
 	while (1)
 	{
 		the_prompt();
@@ -89,7 +94,7 @@ int main(int argc, char *argv[])
 			if (isatty(STDIN_FILENO))
 				printf("exit\n");
 			free(input);
-			exit(1);
+			exit(0);
 		}
 		input[input_readed - 1] = '\0';
 		if (strlen(input) == 0)
