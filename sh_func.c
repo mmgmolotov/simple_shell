@@ -69,7 +69,6 @@ int main(int argc, char *argv[])
 		if (input_readed == -1)
 		{
 			if (isatty(STDIN_FILENO))
-				printf("exit\n");
 			free(input);
 			exit(0);
 		}
