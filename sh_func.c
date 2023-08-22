@@ -57,6 +57,11 @@ int main(int argc, char *argv[])
 
 	input = NULL;
 	length = 0;
+	if (argc != 1)
+	{
+		perror("usage");
+		return (1);
+	}
 	while (1)
 	{
 		the_prompt();
