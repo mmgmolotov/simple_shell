@@ -21,9 +21,13 @@ void proc_input(char *input, char **p_name)
 {
 	int wwait;
 	size_t length = strlen(input);
-	pid_t pid = fork();
+	pid_t pid;
 
+	if (length > 0 && input[length - 1] == '\n')
+	{
 	input[length - 1] = '\0';
+	}
+	pid = fork();
 	if (pid == 0)
 	{
 		char *cmd = strtok(input, " ");
