@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 			free(input);
 			continue;
 		}
-		proc_input(input, argv[0]);
+		fork_process(input, argv[0]);
 		free(input);
 		input = NULL;
 	}
