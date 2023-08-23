@@ -14,10 +14,10 @@ void the_prompt(void)
 /**
  * fork_process - function declaration
  *
- * @input: input to check
+ * @my_input: input to check
  * @name: path name
 */
-void fork_process(char *input, char *name)
+void fork_process(char *my_input, char *name)
 {
 	pid_t pid;
 	int wwait;
@@ -25,11 +25,11 @@ void fork_process(char *input, char *name)
 	pid = fork();
 	if (pid == 0)
 	{
-		char *arr[2];/*we don't use const arass taro (fixed) */
+		char *arr[2];
 
-		arr[0] = input;
+		arr[0] = my_input;
 		arr[1] = NULL;
-		execve(input, arr, NULL);
+		execve(my_input, arr, NULL);
 		perror(name);
 		exit(1);
 	}
@@ -41,21 +41,21 @@ void fork_process(char *input, char *name)
 /**
  * command_arg - function declaration
  *
- * @input: user input
- * @command: command to execute
- * @argument: argumment added
+ * @user_input: user input
+ * @com: command to execute
+ * @argu: argumment added
  * @argv: number of commands
 */
-void command_arg(char *input, char *command, char *argument, char argv[])
+void command_arg(char *user_input, char *com, char *argu, char argv[])
 {
-	command = strtok(input, " ");
-	argument = strtok(NULL, " ");
+	com = strtok(user_input, " ");
+	argu = strtok(NULL, " ");
 
-	if (command != NULL)
+	if (com != NULL)
 	{
-		fork_process(input, &argv[0]);
-		if (argument != NULL)
-			printf("%s\n", argument);
+		fork_process(user_input, &argv[0]);
+		if (argu != NULL)
+			printf("%s\n", argu);
 	}
 }
 /**
@@ -70,15 +70,16 @@ void command_arg(char *input, char *command, char *argument, char argv[])
 */
 int main(int argc, char *argv[])
 {
-	(void)(argc);
+	char *input, **command, **argument;
 
-	char *input;
-	char *command;
-	char *argument;
 	size_t length;
 	ssize_t input_readed;
 
+	(void)(argc);
+
 	input = NULL;
+	*command = NULL;
+	*argument = NULL;
 	length = 0;
 	if (argc != 1)
 	{
@@ -102,10 +103,11 @@ int main(int argc, char *argv[])
 			free(input);
 			continue;
 		}
-		command_arg(input, command, argument, argv[0]);
+		command_arg(input, *command, *argument, argv[0]);
 		free(input);
 		input = NULL;
 	}
-	free(input);
+	free(command);
+	free(argument);
 	return (0);
 }
