@@ -12,9 +12,6 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
-void the_prompt(void);
-void fork_process(char *input, char *name);
-void proc_input(char *input, char *p_name);
-void ex_bi(void);
-char *r_input(void);
+void proc_input(char *input, char **p_name);
+void _EOF(char *beffer);
 #endif /* SHELL_H */

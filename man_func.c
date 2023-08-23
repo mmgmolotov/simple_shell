@@ -1,52 +1,40 @@
 #include "shell.h"
 /**
- * ex_bi - exit built in function
+ *_EOF - function
  * Return: void
- *void ex_bi(void)
-{
-	if (isatty(STDIN_FILENO))
-		printf("exit\n");
-	exit(0);
 */
+void _EOF(char *buffer )
+{
+	if (beffer != NULL)
+		free(beffer);
+	exit(0);
+}
 /**
  * proc_input - function that execute a command
  * @input: ptr to input
  * @p_name: ptr to program name
  * Return: void
  */
-void proc_input(char *input, char *p_name)
+void proc_input(char *input, char **p_name)
 {
-	char *cmd, *arg;
+	int wwait;
+	size_t length = strlen(input);
+	pid_t pid = fork();
 
-	cmd = strtok(input, " ");
-	arg = strtok(NULL, " ");
-
-	if (cmd != NULL)
+	input[length - 1] = '\0';
+	if (pid == 0)
 	{
-		fork_process(input, p_name);
-		if (arg != NULL)
-			printf("%s\n", arg);
-	}
-}
-/**
- * r_input - func that read the input
- * Return: void
- */
-char *r_input(void)
-{
-	char *input;
-	size_t length;
-	ssize_t input_readed;
+		char *cmd = strtok(input, " ");
+		char arr[2];
 
-	input = NULL;
-	length = 0;
-	input_readed = getline(&input, &length, stdin);
-	if (input_readed == -1)
-	{
-		if (isatty(STDIN_FILENO))
-			free(input);
-		exit(0);
+		arr[0] = cmd;
+		arr[1] = NULL;
+		execve(cmd, arr, p_name);
+		perror("");
+		exit(1);
 	}
-	input[input_readed - 1] = '\0';
-	return (input);
+	else if (pid > 0)
+		waitpid(pid, &wwait,0);
+	else
+		perror("");
 }
