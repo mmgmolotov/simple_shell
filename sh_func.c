@@ -51,7 +51,11 @@ void fork_process(char *input, char *name)
 int main(int argc, char *argv[])
 {
 	char *input;
+	size_t length;
+	ssize_t input_readed;
 
+	input = NULL;
+	length = 0;
 	if (argc != 1)
 	{
 		perror("usage");
@@ -60,7 +64,16 @@ int main(int argc, char *argv[])
 	while (1)
 	{
 		the_prompt();
-		input = r_input();
+		input_readed = getline(&input, &length, stdin);
+		if (input_readed == -1)
+		{
+			if (isatty(STDIN_FILENO))
+			{
+				free(input);
+			}
+			exit(0);
+		}
+		input[input_readed - 1] = '\0';
 		if (strlen(input) == 0)
 		{
 			free(input);
@@ -68,6 +81,8 @@ int main(int argc, char *argv[])
 		}
 		proc_input(input, argv[0]);
 		free(input);
+		input = NULL;
 	}
+	free(input);
 	return (0);
 }
