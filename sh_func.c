@@ -7,8 +7,7 @@ void the_prompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		printf("#cisfun$ ");
-		fflush(stdout);
+		write(1, "#cisfun$ ", 8);
 	}
 }
 /**
