@@ -7,44 +7,41 @@
  *
  * @argc: length of gcc
  * @argv: argument to check
- *
+ * @evp: arg envirnement
  * Return: 0
 */
-int main(int argc, char *argv[])
+int main(int argc, char **argv, char **evp)
 {
-	char *input;
-	size_t length;
-	ssize_t input_readed;
+	int r_bts;
+	char *in_buf;
+	size_t buf_size;
+	(void)argc;
+	(void)argv;
 
-	input = NULL;
-	length = 0;
-	if (argc != 1)
-	{
-		perror("usage");
-		return (0);
-	}
+	r_bts = 0;
+	in_buf = NULL;
+	buf_size = 0;
 	while (1)
 	{
-		the_prompt();
-		input_readed = getline(&input, &length, stdin);
-		if (input_readed == -1)
+		if (isatty(STDIN_FILENO))
 		{
-			if (isatty(STDIN_FILENO))
-			{
-				free(input);
-			}
-			exit(0);
+			printf("cisfun$ ");
 		}
-		input[input_readed - 1] = '\0';
-		if (strlen(input) == 0)
+		r_bts = getline(&in_buf, &buf_size, stdin);
+		if (r_bts == EOF)
 		{
-			free(input);
+			_EOF(in_buf);
+		}
+		else if (*in_buf == '\n' || strspn(in_buf, "\n") == strlen(in_buf))
+		{
 			continue;
 		}
-		fork_process(input, argv[0]);
-		free(input);
-		input = NULL;
+		else
+		{
+			proc_input(in_buf, evp);
+		}
+		free(in_buf);
+		in_buf = NULL;
 	}
-	free(input);
 	return (0);
 }

@@ -3,10 +3,12 @@
  *_EOF - function
  * Return: void
 */
-void _EOF(char *buffer )
+void _EOF(char *buffer)
 {
-	if (beffer != NULL)
-		free(beffer);
+	if (buffer != NULL)
+	{
+		free(buffer);
+	}
 	exit(0);
 }
 /**
@@ -25,7 +27,7 @@ void proc_input(char *input, char **p_name)
 	if (pid == 0)
 	{
 		char *cmd = strtok(input, " ");
-		char arr[2];
+		char *arr[2];
 
 		arr[0] = cmd;
 		arr[1] = NULL;
@@ -34,7 +36,7 @@ void proc_input(char *input, char **p_name)
 		exit(1);
 	}
 	else if (pid > 0)
-		waitpid(pid, &wwait,0);
+		waitpid(pid, &wwait, 0);
 	else
 		perror("");
 }
