@@ -2,13 +2,12 @@
 /**
  * ex_bi - exit built in function
  * Return: void
- */
-void ex_bi(void)
+ *void ex_bi(void)
 {
 	if (isatty(STDIN_FILENO))
 		printf("exit\n");
 	exit(0);
-}
+*/
 /**
  * proc_input - function that execute a command
  * @input: ptr to input
@@ -24,16 +23,9 @@ void proc_input(char *input, char *p_name)
 
 	if (cmd != NULL)
 	{
-		if (strcmp(cmd, "exit") == 0)
-		{
-			ex_bi();
-		}
-		else
-		{
-			fork_process(input, p_name);
-			if (arg != NULL)
-				printf("%s\n", arg);
-		}
+		fork_process(input, p_name);
+		if (arg != NULL)
+			printf("%s\n", arg);
 	}
 }
 /**

@@ -61,7 +61,6 @@ int main(int argc, char *argv[])
 	{
 		the_prompt();
 		input = r_input();
-		r_input();
 		if (strlen(input) == 0)
 		{
 			free(input);
