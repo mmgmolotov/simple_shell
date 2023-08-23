@@ -39,26 +39,6 @@ void fork_process(char *my_input, char *name)
 		perror(name);
 }
 /**
- * command_arg - function declaration
- *
- * @user_input: user input
- * @com: command to execute
- * @argu: argumment added
- * @argv: number of commands
-*/
-void command_arg(char *user_input, char *com, char *argu, char argv[])
-{
-	com = strtok(user_input, " ");
-	argu = strtok(NULL, " ");
-
-	if (com != NULL)
-	{
-		fork_process(user_input, &argv[0]);
-		if (argu != NULL)
-			printf("%s\n", argu);
-	}
-}
-/**
  * main - Entry point
  *
  * Description - let's try to create a little shell
@@ -70,16 +50,13 @@ void command_arg(char *user_input, char *com, char *argu, char argv[])
 */
 int main(int argc, char *argv[])
 {
-	char *input, **command, **argument;
-
+	char *input;
 	size_t length;
 	ssize_t input_readed;
 
 	(void)(argc);
 
 	input = NULL;
-	*command = NULL;
-	*argument = NULL;
 	length = 0;
 	if (argc != 1)
 	{
@@ -93,7 +70,6 @@ int main(int argc, char *argv[])
 		if (input_readed == -1)
 		{
 			if (isatty(STDIN_FILENO))
-				printf("exit\n");
 			free(input);
 			exit(0);
 		}
@@ -103,11 +79,10 @@ int main(int argc, char *argv[])
 			free(input);
 			continue;
 		}
-		command_arg(input, *command, *argument, argv[0]);
+		exec_cmd(input, argv[0]);
 		free(input);
 		input = NULL;
 	}
-	free(command);
-	free(argument);
+	free(input);
 	return (0);
 }
