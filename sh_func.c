@@ -32,7 +32,7 @@ int main(int argc, char **argv, char **evp)
 		{
 			_EOF(in_buf);
 		}
-		else if (*in_buf == '\n' || strspn(in_buf, "\t\r\n") == strlen(in_buf))
+		else if (*in_buf == '\n' || strspn(in_buf, "") == strlen(in_buf))
 		{
 			continue;
 		}
