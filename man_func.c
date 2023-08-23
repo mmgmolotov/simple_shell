@@ -10,12 +10,12 @@ void ex_bi(void)
 	exit(0);
 }
 /**
- * exec_cmd - function that execute a command
+ * proc_input - function that execute a command
  * @input: ptr to input
- * @argv0: ptr to argv[0]
+ * @p_name: ptr to program name
  * Return: void
  */
-void exec_cmd(char *input, char *argv0)
+void proc_input(char *input, char *p_name)
 {
 	char *cmd, *arg;
 
@@ -30,9 +30,31 @@ void exec_cmd(char *input, char *argv0)
 		}
 		else
 		{
-			fork_process(input, argv0);
+			fork_process(input, p_name);
 			if (arg != NULL)
 				printf("%s\n", arg);
 		}
 	}
+}
+/**
+ * r_input - func that read the input
+ * Return: void
+ */
+char *r_input(void)
+{
+	char *input;
+	size_t length;
+	ssize_t input_readed;
+
+	input = NULL;
+	length = 0;
+	input_readed = getline(&input, &length, stdin);
+	if (input_readed == -1)
+	{
+		if (isatty(STDIN_FILENO))
+			free(input);
+		exit(0);
+	}
+	input[input_readed - 1] = '\0';
+	return (input);
 }
