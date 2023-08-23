@@ -27,6 +27,8 @@ int main(int argc, char **argv, char **evp)
 		{
 			printf("cisfun$ ");
 		}
+		signal(SIGINT, h_sig);
+
 		r_bts = getline(&in_buf, &buf_size, stdin);
 		if (r_bts == EOF)
 		{

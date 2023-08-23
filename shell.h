@@ -13,5 +13,6 @@
 #include <sys/stat.h>
 
 void proc_input(char *input, char **p_name);
-void _EOF(char *beffer);
+void _EOF(char *buffer);
+void h_sig(int n_sig);
 #endif /* SHELL_H */

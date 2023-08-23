@@ -1,6 +1,7 @@
 #include "shell.h"
 /**
  *_EOF - function
+ * @buffer: buf
  * Return: void
 */
 void _EOF(char *buffer)
@@ -43,4 +44,13 @@ void proc_input(char *input, char **p_name)
 		waitpid(pid, &wwait, 0);
 	else
 		perror("");
+}
+/**
+ *h_sig - func handle signal
+ *@n_sig: num sig
+ */
+void h_sig(int n_sig)
+{
+	if (n_sig == SIGINT)
+		printf("cisfun$ ");
 }
