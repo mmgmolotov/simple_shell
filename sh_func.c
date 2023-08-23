@@ -17,7 +17,7 @@ void the_prompt(void)
  * @my_input: input to check
  * @name: path name
 */
-void fork_process(char *my_input, char *name)
+void fork_process(char *input, char *name)
 {
 	pid_t pid;
 	int wwait;
@@ -27,9 +27,9 @@ void fork_process(char *my_input, char *name)
 	{
 		char *arr[2];
 
-		arr[0] = my_input;
+		arr[0] = input;
 		arr[1] = NULL;
-		execve(my_input, arr, NULL);
+		execve(input, arr, NULL);
 		perror(name);
 		exit(1);
 	}
@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
 	{
 		the_prompt();
 		input = r_input();
+		r_input();
 		if (strlen(input) == 0)
 		{
 			free(input);
