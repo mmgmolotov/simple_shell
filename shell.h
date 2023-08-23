@@ -14,5 +14,8 @@
 
 void the_prompt(void);
 void fork_process(char *input, char *name);
+void exec_cmd(char *input, char *argv0);
+void ex_bi(void);
+
 
 #endif /* SHELL_H */

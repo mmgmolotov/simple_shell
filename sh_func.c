@@ -51,7 +51,7 @@ void fork_process(char *input, char *name)
 */
 int main(int argc, char *argv[])
 {
-	char *input, *command, *argument;
+	char *input;
 	size_t length;
 	ssize_t input_readed; /* bach ncompariw integer m3a mokhtalaf signed */
 
@@ -78,14 +78,7 @@ int main(int argc, char *argv[])
 			free(input);
 			continue;
 		}
-		command = strtok(input, " ");
-		argument = strtok(NULL, " ");
-		if (command != NULL)
-		{
-			fork_process(input, argv[0]);
-			if (argument != NULL)
-				printf("%s", argument);
-		}
+		exec_cmd(input, argv[0]);
 		free(input);
 		input = NULL;
 	}
