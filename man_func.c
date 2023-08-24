@@ -19,7 +19,7 @@ void _EOF(char *buffer)
 void proc_input(char *input, char **p_name)
 {
 	int wwait, i;
-	char *cmd; 
+	char *cmd;
 	char *argr[MAXX];
 	size_t length = strlen(input);
 	pid_t pid;
@@ -36,7 +36,7 @@ void proc_input(char *input, char **p_name)
 	{
 	input[length - 1] = '\0';
 	}
-	if (strcmp(argr[0] ,"exit") == 0)
+	if (strcmp(argr[0], "exit") == 0)
 	{
 		free(cmd);
 		exit(0);
