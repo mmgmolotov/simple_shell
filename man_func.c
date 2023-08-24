@@ -18,15 +18,28 @@ void _EOF(char *buffer)
  */
 void proc_input(char *input, char **p_name)
 {
-	int wwait;
-	char *cmd;
+	int wwait, i;
+	char *cmd; 
+	char *argr[MAXX];
 	size_t length = strlen(input);
 	pid_t pid;
 
+	i = 0;
 	cmd = strtok(input, " ");
+	while (cmd != NULL)
+	{
+		argr[i++] = cmd;
+		cmd = strtok(NULL, " ");
+	}
+	argr[i] = NULL;
 	if (length > 0 && input[length - 1] == '\n')
 	{
 	input[length - 1] = '\0';
+	}
+	if (strcmp(argr[0] ,"exit") == 0)
+	{
+		free(cmd);
+		exit(0);
 	}
 	pid = fork();
 	if (pid == 0)
