@@ -19,13 +19,8 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			printf("cisfun$ ");
+			printf("#cisfun$ ");
 			fflush(stdout);
-		}
-		if (strcmp(in_buf, "exit") == 0)
-		{
-			free(in_buf);
-			exit(0);
 		}
 		r_bts = getline(&in_buf, &buf_size, stdin);
 		if (r_bts == -1)
