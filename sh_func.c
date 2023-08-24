@@ -27,7 +27,7 @@ int main(void)
 		{
 			_EOF(in_buf);
 		}
-		else if (r_bts == 1 || strspn(in_buf, " \t\n") == (size_t)r_bts || strspn(in_buf, " \t\n") == (((size_t)r_bts - 1)))
+		else if (r_bts == 1 || strspn(in_buf, " \t\n") == (size_t)r_bts)
 		{
 			continue;
 		}

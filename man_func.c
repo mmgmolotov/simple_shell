@@ -45,6 +45,7 @@ void proc_input(char *input, char **p_name)
 }
 /**
  * _signal - function declaration
+ * @num: number argument
 */
 void _signal(int num)
 {
@@ -52,9 +53,9 @@ void _signal(int num)
 	{
 	}
 }
- /**
-  * h_sig - func handle signal
-  * @n_sig: num sig
+/**
+ * h_sig - func handle signal
+ * @n_sig: num sig
 */
 
 
