@@ -38,7 +38,7 @@ void proc_input(char *input, char **p_name)
 		arr[1] = NULL;
 		execve(cmd, arr, p_name);
 		perror("");
-		exit(1);
+		exit(0);
 	}
 	else if (pid > 0)
 		waitpid(pid, &wwait, 0);
