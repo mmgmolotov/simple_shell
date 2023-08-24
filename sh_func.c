@@ -1,50 +1,48 @@
 #include "shell.h"
 /**
- * _prompt - function print the prompt
-*/
-void _prompt(void)
-{
-	if (isatty(STDIN_FILENO))
-	{
-		write(1, "#cisfun$ ", 9);
-	}
-}
-/**
  * main - Entry point
  *
  * Description - let's try to create a little shell
  *
  * @argc: length of gcc
  * @argv: argument to check
- *
+ * @evp: arg envirnement
  * Return: 0
 */
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **evp)
 {
-	char *input;
-	char **env;
-	size_t length;
-	ssize_t input_readed;
-	(void)(argc);
-	(void)(argv);
+	int r_bts;
+	char *in_buf;
+	size_t buf_size;
+	(void)argc;
+	(void)argv;
 
-	input = NULL;
-	length = 0;
+	r_bts = 0;
+	in_buf = NULL;
+	buf_size = 0;
 	while (1)
 	{
-		_prompt();
-		signal(SIGINT, _signal);
-		input_readed = getline(&input, &length, stdin);
-		input[input_readed - 1] = '\0';
-		if (input_readed == -1)
-			_EOF(input);
-		else if (strspn(input, " \t\r\n") == strlen(input))
+		if (isatty(STDIN_FILENO))
+		{
+			printf("cisfun$ ");
+		}
+		signal(SIGINT, h_sig);
+
+		r_bts = getline(&in_buf, &buf_size, stdin);
+		if (r_bts == EOF)
+		{
+			_EOF(in_buf);
+		}
+		else if (*in_buf == '\n' || strspn(in_buf, "") == strlen(in_buf))
+		{
 			continue;
+		}
 		else
-			proc_input(input, env);
-		free(input);
-		input = NULL;
+		{
+			proc_input(in_buf, evp);
+		}
 	}
-	free(input);
+		free(in_buf);
+		in_buf = NULL;
 	return (0);
 }

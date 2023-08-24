@@ -1,6 +1,7 @@
 #include "shell.h"
 /**
  *_EOF - function
+ * @buffer: buf
  * Return: void
 */
 void _EOF(char *buffer)
@@ -19,22 +20,26 @@ void proc_input(char *input, char **p_name)
 {
 	int wwait;
 	size_t length = strlen(input);
-	pid_t pid = fork();
+	pid_t pid;
 
+	if (length > 0 && input[length - 1] == '\n')
+	{
 	input[length - 1] = '\0';
+	}
+	pid = fork();
 	if (pid == 0)
 	{
 		char *cmd = strtok(input, " ");
-		char arr[2];
+		char *arr[2];
 
 		arr[0] = cmd;
 		arr[1] = NULL;
 		execve(cmd, arr, p_name);
 		perror("");
-		exit(1);
+		exit(0);
 	}
 	else if (pid > 0)
-		waitpid(pid, &wwait,0);
+		waitpid(pid, &wwait, 0);
 	else
 		perror("");
 }
@@ -44,4 +49,17 @@ void proc_input(char *input, char **p_name)
 void _signal(int num)
 {
 	if (num == SIGINT)
+	{
+	}
+}
+ /**
+  * h_sig - func handle signal
+  * @n_sig: num sig
+*/
+
+
+void h_sig(int n_sig)
+{
+	if (n_sig == SIGINT)
+		printf("cisfun$ ");
 }
