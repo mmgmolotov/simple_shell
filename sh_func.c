@@ -22,9 +22,9 @@ int main(void)
 			printf("cisfun$ ");
 			fflush(stdout);
 		}
-		if (strcmp(input, "exit") == 0)
+		if (strcmp(in_buf, "exit") == 0)
 		{
-			free(input);
+			free(in_buf);
 			exit(0);
 		}
 		r_bts = getline(&in_buf, &buf_size, stdin);
