@@ -3,14 +3,17 @@
  * main - Entry point
  *
  * Description - let's try to create a little shell
+ * @argc: length 
+ * @argv: argument
  * Return: void
 */
-int main(void)
+int main(int argc, char **argv)
 {
 	ssize_t r_bts;
 	char *in_buf;
 	size_t buf_size;
 
+	(void)(argc);
 	r_bts = 0;
 	in_buf = NULL;
 	buf_size = 0;
@@ -33,7 +36,7 @@ int main(void)
 		}
 		else
 		{
-			proc_input(in_buf, NULL);
+			proc_input(in_buf, &argv[0]);
 		}
 		free(in_buf);
 		in_buf = NULL;
