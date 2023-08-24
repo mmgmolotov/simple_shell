@@ -15,5 +15,5 @@
 void proc_input(char *input, char **p_name);
 void _EOF(char *buffer);
 void h_sig(int n_sig);
-
+void _signal(int num);
 #endif /* SHELL_H */
