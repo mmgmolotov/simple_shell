@@ -23,16 +23,10 @@ void proc_input(char *input, char **p_name)
 	size_t length = strlen(input);
 	pid_t pid;
 
-	i = 0;
 	cmd = strtok(input, " ");
 	if (length > 0 && input[length - 1] == '\n')
 	{
 	input[length - 1] = '\0';
-	}
-	if (strcmp(argr[0], "exit") == 0)
-	{
-		free(cmd);
-		exit(0);
 	}
 	pid = fork();
 	if (pid == 0)
