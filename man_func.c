@@ -3,10 +3,10 @@
  *_EOF - function
  * Return: void
 */
-void _EOF(char *buffer )
+void _EOF(char *buffer)
 {
-	if (beffer != NULL)
-		free(beffer);
+	if (buffer != NULL)
+		free(buffer);
 	exit(0);
 }
 /**
@@ -37,4 +37,11 @@ void proc_input(char *input, char **p_name)
 		waitpid(pid, &wwait,0);
 	else
 		perror("");
+}
+/**
+ * _signal - function declaration
+*/
+void _signal(int num)
+{
+	if (num == SIGINT)
 }

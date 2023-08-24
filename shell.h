@@ -14,4 +14,6 @@
 
 void proc_input(char *input, char **p_name);
 void _EOF(char *beffer);
+void _prompt(void);
+void _signal(int num);
 #endif /* SHELL_H */

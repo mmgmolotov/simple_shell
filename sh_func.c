@@ -1,5 +1,14 @@
 #include "shell.h"
-
+/**
+ * _prompt - function print the prompt
+*/
+void _prompt(void)
+{
+	if (isatty(STDIN_FILENO))
+	{
+		write(1, "#cisfun$ ", 9);
+	}
+}
 /**
  * main - Entry point
  *
@@ -10,38 +19,29 @@
  *
  * Return: 0
 */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
 	char *input;
+	char **env;
 	size_t length;
 	ssize_t input_readed;
+	(void)(argc);
+	(void)(argv);
 
 	input = NULL;
 	length = 0;
-	if (argc != 1)
-	{
-		perror("usage");
-		return (0);
-	}
 	while (1)
 	{
-		the_prompt();
+		_prompt();
+		signal(SIGINT, _signal);
 		input_readed = getline(&input, &length, stdin);
-		if (input_readed == -1)
-		{
-			if (isatty(STDIN_FILENO))
-			{
-				free(input);
-			}
-			exit(0);
-		}
 		input[input_readed - 1] = '\0';
-		if (strlen(input) == 0)
-		{
-			free(input);
+		if (input_readed == -1)
+			_EOF(input);
+		else if (strspn(input, " \t\r\n") == strlen(input))
 			continue;
-		}
-		fork_process(input, argv[0]);
+		else
+			proc_input(input, env);
 		free(input);
 		input = NULL;
 	}
