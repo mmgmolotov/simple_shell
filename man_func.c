@@ -61,5 +61,8 @@ void _signal(int num)
 void h_sig(int n_sig)
 {
 	if (n_sig == SIGINT)
-		printf("cisfun$ ");
+	{
+		printf("\ncisfun$ ");
+		fflush(stdout);
+	}
 }
