@@ -52,7 +52,7 @@ void proc_input(char *input, char **p_name)
 void h_sig(int n_sig)
 {
 	if (n_sig == SIGINT)
-	{	
+	{
 		printf("\ncisfun$ ");
 		fflush(stdout);
 	}
