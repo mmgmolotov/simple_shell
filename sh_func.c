@@ -1,19 +1,18 @@
 #include "shell.h"
-
 /**
  * main - Entry point
- * @argc:arg
- * @argv:argv
  * Description - let's try to create a little shell
+ * @argc: length
+ * @argv: argument
  * Return: void
 */
-int main(int argc, char  **argv)
-{
+int main(int argc, char **argv)
+
 	ssize_t r_bts;
 	char *in_buf;
 	size_t buf_size;
 
-	void(argc);
+	(void)(argc);
 	r_bts = 0;
 	in_buf = NULL;
 	buf_size = 0;
@@ -22,7 +21,7 @@ int main(int argc, char  **argv)
 	{
 		if (isatty(STDIN_FILENO))
 		{
-			printf("cisfun$ ");
+			printf("#cisfun$ ");
 			fflush(stdout);
 		}
 		r_bts = getline(&in_buf, &buf_size, stdin);
@@ -42,6 +41,8 @@ int main(int argc, char  **argv)
 		{
 			proc_input(in_buf, &argv[0]);
 		}
+		free(in_buf);
+		in_buf = NULL;
 	}
 	free(in_buf);
 	return (0);

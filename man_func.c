@@ -7,9 +7,7 @@
 void _EOF(char *buffer)
 {
 	if (buffer != NULL)
-	{
 		free(buffer);
-	}
 	exit(0);
 }
 /**
@@ -21,9 +19,11 @@ void _EOF(char *buffer)
 void proc_input(char *input, char **p_name)
 {
 	int wwait;
+	char *cmd;
 	size_t length = strlen(input);
 	pid_t pid;
 
+	cmd = strtok(input, " ");
 	if (length > 0 && input[length - 1] == '\n')
 	{
 	input[length - 1] = '\0';
@@ -31,24 +31,35 @@ void proc_input(char *input, char **p_name)
 	pid = fork();
 	if (pid == 0)
 	{
-		char *cmd = strtok(input, " ");
 		char *arr[2];
 
 		arr[0] = cmd;
 		arr[1] = NULL;
 		execve(cmd, arr, p_name);
-		perror("");
+		perror(*p_name);
 		exit(0);
 	}
 	else if (pid > 0)
 		waitpid(pid, &wwait, 0);
 	else
-		perror("");
+		perror(*p_name);
 }
 /**
- *h_sig - func handle signal
- *@n_sig: num sig
- */
+ * _signal - function declaration
+ * @num: number argument
+*/
+void _signal(int num)
+{
+	if (num == SIGINT)
+	{
+	}
+}
+/**
+ * h_sig - func handle signal
+ * @n_sig: num sig
+*/
+
+
 void h_sig(int n_sig)
 {
 	if (n_sig == SIGINT)
