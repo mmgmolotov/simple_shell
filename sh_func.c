@@ -7,7 +7,7 @@
  * Return: void
 */
 int main(int argc, char **argv)
-
+{
 	ssize_t r_bts;
 	char *in_buf;
 	size_t buf_size;
